@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+  datasource:
+      url: jdbc:mariadb://localhost:3306/settle_batch
+      username: root
+      password: 678900
+      driver-class-name: org.mariadb.jdbc.Driver
+---
+spring:
+  profiles: mysql
+  datasource:
+      url: jdbc:mariadb://localhost:3306/settle_batch
+      username: root
+      password: 678900
+      driver-class-name: org.mariadb.jdbc.Driver
