@@ -24,6 +24,7 @@ public class SimpleJobConfiguration {
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob") // simpleJob 이름으로 job생성
                 .start(simpleStep1(null)) // simpleStep1을 포함
+                .next(simpleStep2(null))
                 .build();
     }
 
@@ -34,8 +35,7 @@ public class SimpleJobConfiguration {
                 .tasklet((contribution, chunkContext) -> { // Step 안에서 수행될 기능들을 명시
                     log.info(">>>>> 스텝1 시작");
                     log.info(">>>>> 파라미터 : {}", requestDate);
-                    throw new IllegalArgumentException();
-                    //return RepeatStatus.FINISHED;
+                    return RepeatStatus.FINISHED;
                 })
                 .build();
     }
