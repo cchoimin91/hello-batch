@@ -59,7 +59,7 @@ public class StepNextConditionalJobConfiguration {
     public Step conditionalJobStep2() {
         return stepBuilderFactory.get("conditionalJobStep2")
                 .tasklet((contribution, chunkContext) -> {
-                    log.info(">>>>> This is stepNextConditionalJob Step2");
+                    log.info(">>>>>> 스텝2 시작");
                     return RepeatStatus.FINISHED;
                 })
                 .build();
@@ -69,7 +69,7 @@ public class StepNextConditionalJobConfiguration {
     public Step conditionalJobStep3() {
         return stepBuilderFactory.get("conditionalJobStep3")
                 .tasklet((contribution, chunkContext) -> {
-                    log.info(">>>>> This is stepNextConditionalJob Step3");
+                    log.info(">>>>>> 스텝3 시작");
                     return RepeatStatus.FINISHED;
                 })
                 .build();
