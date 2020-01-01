@@ -29,8 +29,8 @@ public class SimpleJobConfiguration {
     }
 
     @Bean
-    @JobScope
-    public Step simpleStep1(@Value("#{jobParameters[requestDate]}") String requestDate) {
+    @JobScope // job 실행시점에 해당 컴포넌트를 Spring bean으로 생성, bean 생성 시점을 지연 (Spring bean의 기본 Scope는 Singleton)
+    public Step simpleStep1(@Value("#{jobParameters[requestDate]}") String requestDate) { // job 파라미터로는 String, long ,double ,date만 가능함 LocalDate, LocalTime은 없음..
         return stepBuilderFactory.get("simpleStep1") // simpleStep1 이름으로 step생성
                 .tasklet((contribution, chunkContext) -> { // Step 안에서 수행될 기능들을 명시
                     log.info(">>>>> 스텝1 시작");
