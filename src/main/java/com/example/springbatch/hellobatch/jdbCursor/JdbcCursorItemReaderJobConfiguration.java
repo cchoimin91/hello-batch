@@ -53,7 +53,7 @@ public class JdbcCursorItemReaderJobConfiguration {
     @Bean
     public Step jdbcCursorItemReaderStep() {
         return stepBuilderFactory.get("jdbcCursorItemReaderStep")
-                .<Pay, Pay>chunk(chunkSize) //1번째 param : Reader에서 반환할 타입, 2번째 param: Writer에 사용 할 파라미터
+                .<Pay, Pay>chunk(chunkSize) //1번째 param : Reader에서 반환 할 타입, 2번째 param: Writer에 사용 할 파라미터
                 .reader(jdbcCursorItemReader())
                 .writer(jdbcCursorItemWriter())
                 .build();
@@ -67,7 +67,7 @@ public class JdbcCursorItemReaderJobConfiguration {
                 .fetchSize(chunkSize) // DB에서 한번에 가져올 데이터양
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(Pay.class)) // 쿼리결과를 java인스턴스로 맵핑
-                .sql("SELECT id, amount, txName, txDateTime FROM pay order by id")
+                .sql("SELECT id, amount, tx_name, tx_date_time FROM pay order by id")
                 .name("jdbcCursorItemReader") // reader의 이름 지정
                 .build();
     }
