@@ -1,4 +1,4 @@
-package com.example.springbatch.hellobatch.jdbcPaging;
+package com.example.springbatch.hellobatch.reader.jdbcPaging;
 
 import com.example.springbatch.hellobatch.model.Pay;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.springbatch.hellobatch.jdbcBatchWriter;
+package com.example.springbatch.hellobatch.writer.jdbcBatchWriter;
 
 import com.example.springbatch.hellobatch.model.Pay;
 import lombok.RequiredArgsConstructor;

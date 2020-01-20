@@ -1,4 +1,4 @@
-package com.example.springbatch.hellobatch.jdbCursor;
+package com.example.springbatch.hellobatch.reader.jdbCursor;
 
 import com.example.springbatch.hellobatch.model.Pay;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +59,6 @@ public class JdbcCursorItemReaderJobConfiguration {
                 .build();
     }
 
-    //READER
     @Bean
     public JdbcCursorItemReader<Pay> jdbcCursorItemReader() {
         log.info(">>>>> JdbcCursorItemReader START ");
@@ -72,7 +71,6 @@ public class JdbcCursorItemReaderJobConfiguration {
                 .build();
     }
 
-    //WRITER
     private ItemWriter<Pay> jdbcCursorItemWriter() {
         log.info(">>>>> jdbcCursorItemWriter START !!!");
         return list -> {
