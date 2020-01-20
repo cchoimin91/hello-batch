@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
 
+//test2
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
