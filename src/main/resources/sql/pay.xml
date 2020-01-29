@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pay">
+
+    <select id="getAllPay" resultMap="" parameterMap="">
+        select id, amount, tx_name
+        from pay
+        where CAST(tx_date_time AS date) > #{date}
+        order by id asc
+    </select>
+
+</mapper>
