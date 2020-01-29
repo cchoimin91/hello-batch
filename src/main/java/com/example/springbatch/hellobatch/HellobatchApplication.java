@@ -4,6 +4,9 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * --job.name=processorCompositeBatch test=1
+ */
 @EnableBatchProcessing
 @SpringBootApplication
 public class HellobatchApplication {
