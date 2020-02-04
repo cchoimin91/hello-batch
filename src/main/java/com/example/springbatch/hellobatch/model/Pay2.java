@@ -26,13 +26,16 @@ public class Pay2 {
         this.txDateTime = LocalDateTime.parse(txDateTime, FORMATTER);
     }
 
+    public Pay2(Long amount, String txName, LocalDateTime txDateTime) {
+        this.amount = amount;
+        this.txName = txName;
+        this.txDateTime = txDateTime;
+    }
+
     public Pay2(Long id, Long amount, String txName, String txDateTime) {
         this.id = id;
         this.amount = amount;
         this.txName = txName;
         this.txDateTime = LocalDateTime.parse(txDateTime, FORMATTER);
-    }
-
-    public Pay2(Long amount, String txName, LocalDateTime txDateTime) {
     }
 }
