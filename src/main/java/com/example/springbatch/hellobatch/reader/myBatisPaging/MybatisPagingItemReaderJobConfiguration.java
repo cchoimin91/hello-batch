@@ -1,19 +1,19 @@
 package com.example.springbatch.hellobatch.reader.myBatisPaging;
 
-import com.example.springbatch.hellobatch.mapper.PayMapper;
 import com.example.springbatch.hellobatch.model.Pay;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.batch.MyBatisPagingItemReader;
 import org.mybatis.spring.batch.builder.MyBatisPagingItemReaderBuilder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,48 +31,53 @@ public class MybatisPagingItemReaderJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    private SqlSessionFactory sqlSessionFactory;
-    private SqlSessionTemplate sqlSessionTemplate;
-
     @Autowired
-    private PayMapper payMapper;
+    private SqlSessionFactory sqlSessionFactory;
 
-    private static final  int chunkSize = 2;
+    private static final int chunkSize = 2;
+
+
 
     @Bean
     public Job myBatisPagingItemReaderJob(){
-        return jobBuilderFactory.get("myBatisPaingItemReaderJob")
+        log.info(">>>>>> myBatisPagingItemReaderJob START !!!");
+        return jobBuilderFactory.get("myBatisPagingItemReaderJob")
                 .start(myBatisPagingItemReaderStep())
                 .build();
     }
 
     @Bean
     public Step myBatisPagingItemReaderStep(){
+        log.info(">>>>>> myBatisPagingItemReaderStep START !!! ");
         return stepBuilderFactory.get("myBatisPagingItemReaderStep")
                 .<Pay, Pay>chunk(chunkSize)
-                .reader(myBatisPagingItemReader())
+                .reader(myBatisPagingItemReader(null))
                 .writer(myBatisPagingItemWriter())
                 .build();
     }
 
+    @JobScope
     @Bean
-    public MyBatisPagingItemReader<Pay> myBatisPagingItemReader() {
-        log.info(">>>>> myBatisPagingItemReader START !!!");
+    public MyBatisPagingItemReader<Pay> myBatisPagingItemReader(@Value("#{jobParameters[requestDate]}") String requestDate) {
+        log.info(">>>>>> myBatisPagingItemReader START !!!");
+        log.info(">>>>>> requestDate : {}", requestDate);
+
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("date", "2020-01-01");
+        param.put("date", requestDate);
 
         return new MyBatisPagingItemReaderBuilder<Pay>()
                 .sqlSessionFactory(sqlSessionFactory)
-                .queryId("com.example.springbatch.hellobatch.mapper.PayMapper.getAllPay")
+                .queryId("getAllPay")
                 .parameterValues(param)
                 .pageSize(chunkSize)
                 .build();
     }
 
     private ItemWriter<Pay> myBatisPagingItemWriter() {
+        log.info(">>>>> myBatisPagingItemWriter START !!!" );
         return list -> {
             for (Pay pay: list) {
-                log.info("Current Pay={}", pay);
+                log.info(">>>>>> Current Pay={}", pay);
             }
         };
     }
