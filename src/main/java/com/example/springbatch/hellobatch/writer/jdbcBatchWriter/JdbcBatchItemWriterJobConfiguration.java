@@ -75,10 +75,8 @@ public class JdbcBatchItemWriterJobConfiguration {
      *
      * JdbcBatchItemWriterBuilder
      * .assertUpdate() // 최소1개의 항목이 update or delete되지 않을 경우 throw할지 여부를 설정(기본 true) EmptyResultDataAccessException 발생
-     * .columnMapped() // key,value 기반으로 insert SQL의 value를 맵핑함
+     * .columnMapped() // Map<key,value> 기반으로 insert SQL의 value를 맵핑함
      * .beanMapped() // Pojo기반으로 insert SQL의 value를 맵핑함
-     *
-     * 주의사항
      *
      */
     @Bean // beanMapped()을 사용할때는 필수
