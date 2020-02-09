@@ -38,4 +38,9 @@ public class Pay2 {
         this.txName = txName;
         this.txDateTime = LocalDateTime.parse(txDateTime, FORMATTER);
     }
+
+    public Pay2(Long amount, String txName) {
+        this.amount = amount;
+        this.txName = txName;
+    }
 }
