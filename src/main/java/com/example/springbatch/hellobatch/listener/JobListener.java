@@ -20,7 +20,7 @@ public class JobListener implements JobExecutionListener {
         if(jobExecution.getStatus() == BatchStatus.COMPLETED){
             log.info("========== JOB 실행결과 : 성공 ==========");
         }else{
-            log.info("========== JOB 실행결과 : 확인필요 ==========");
+            log.info("========== JOB 실행결과 : 확인필요({}) ==========", jobExecution.getStatus());
         }
 
     }
