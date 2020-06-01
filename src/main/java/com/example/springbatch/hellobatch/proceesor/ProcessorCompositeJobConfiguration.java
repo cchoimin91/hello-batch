@@ -96,6 +96,7 @@ public class ProcessorCompositeJobConfiguration {
 
     @Bean
     public CompositeItemProcessor compositeProcessor() {
+        log.info(">>>>>> compositeProcessor() !!! ");
         // delegates 포함된 모든 ItemProcessor 같은 제너릭 타입을 가져야함
         List<ItemProcessor> delegates = new ArrayList<>(2);
         delegates.add(processor1());
@@ -113,13 +114,14 @@ public class ProcessorCompositeJobConfiguration {
     }
 
     public ItemProcessor<String, String> processor2() {
+
         return name -> "안녕하세요. "+ name + "입니다.";
     }
 
     private ItemWriter<String> compositeWriter() {
         return items -> {
             for (String item : items) {
-                log.info("Teacher Name={}", item);
+                log.info(">>>>> Teacher Name={}", item);
             }
         };
     }

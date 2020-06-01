@@ -40,7 +40,7 @@ public class ProcessorConvertJobConfiguration {
     @Bean(JOB_NAME)
     public Job job() {
         return jobBuilderFactory.get(JOB_NAME)
-                .preventRestart()
+                //.preventRestart()
                 .start(step())
                 .build();
     }
@@ -73,6 +73,10 @@ public class ProcessorConvertJobConfiguration {
     @Bean
     public ItemProcessor<Teacher, String> processor() {
         return teacher -> {
+            if(teacher.getName().equals("바람")){
+                log.info(">>>>> 필터");
+                return null; // FILTER_COUNT ++
+            }
             return teacher.getName();
         };
     }
